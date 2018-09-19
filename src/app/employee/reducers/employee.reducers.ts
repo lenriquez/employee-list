@@ -23,12 +23,14 @@ export function reducer(state = initialState, action) {
       };
     }
     case EmployeesActionTypes.LoadEmployeesSuccess: {
-      return {
-        ...state,
-        loading: false,
-        loaded: true,
-        employees: action.payload
-      };
+      // The if is not necessary if I had a real database;
+      return state.loaded ?
+        { ...state } :
+        { ...state,
+          loading: false,
+          loaded: true,
+          employees: action.payload
+        };
     }
 
     case EmployeesActionTypes.RemoveEmployees: {
