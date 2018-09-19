@@ -13,6 +13,10 @@ import { EmployeeEditComponent } from './employee/containers/employee-edit/emplo
 import { EmployeeEffects } from './employee/effects/employee.effect';
 import { reducer } from './employee/reducers/employee.reducers';
 
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +30,9 @@ import { reducer } from './employee/reducers/employee.reducers';
     HttpClientModule,
     StoreModule.forRoot({ employees: reducer }),
     EffectsModule.forRoot([EmployeeEffects]),
+    MatTableModule,
+    MatButtonModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

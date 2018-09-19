@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Employee } from '../../models/employee';
-import { LoadEmployees } from '../../actions/employee.actions';
+import { LoadEmployees, RemoveEmployees } from '../../actions/employee.actions';
 import { Observable } from 'rxjs';
+import { faEdit, faEye, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-employee-list',
@@ -11,6 +12,8 @@ import { Observable } from 'rxjs';
 })
 export class EmployeeListComponent implements OnInit {
   employee$: Observable<any>;
+  displayedColumns = ['name', 'age', 'username', 'hireDate', 'actions'];
+  icons = [ faEdit, faEye, faTrash ];
 
   constructor(private store: Store<{employees: Employee[]}>) {
     this.employee$ = this.store.pipe(select('employees'));
@@ -18,6 +21,9 @@ export class EmployeeListComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new LoadEmployees());
+  }
 
+  remove(id: string) {
+    this.store.dispatch(new RemoveEmployees(id));
   }
 }

@@ -1,4 +1,4 @@
-import { LoadEmployees, EmployeesActionTypes } from './../actions/employee.actions';
+import { LoadEmployees, EmployeesActionTypes, RemoveEmployees } from './../actions/employee.actions';
 import { Employee } from './../models/employee';
 import { Action } from '@ngrx/store';
 
@@ -29,6 +29,11 @@ export function reducer(state = initialState, action) {
         loaded: true,
         employees: action.payload
       };
+    }
+
+    case EmployeesActionTypes.RemoveEmployees: {
+      state.employees = state.employees.filter(e => e.id !== action.id);
+      return { ...state };
     }
   }
 
