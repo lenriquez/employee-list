@@ -1,0 +1,35 @@
+import { LoadEmployees, EmployeesActionTypes } from './../actions/employee.actions';
+import { Employee } from './../models/employee';
+import { Action } from '@ngrx/store';
+
+export interface State {
+  loading: boolean;
+  loaded: boolean;
+  employees: Employee[];
+}
+
+const initialState: State = {
+  loading: false,
+  loaded: false,
+  employees: []
+};
+
+export function reducer(state = initialState, action) {
+  switch (action.type) {
+    case EmployeesActionTypes.LoadEmployees: {
+      return {
+        ...state,
+        loading: false,
+      };
+    }
+    case EmployeesActionTypes.LoadEmployeesSuccess: {
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        employees: action.payload
+      };
+    }
+  }
+
+}
