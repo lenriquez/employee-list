@@ -6,7 +6,7 @@
   "username": "test1",
   "hireDate": 1537289275217,
   "status": "statis",
-  "area": "string",
+  "area": "service",
   "jobTitle": "Developer",
   "tipRate": 30
 },
@@ -18,7 +18,7 @@
   "username": "test1",
   "hireDate": 1437289275210,
   "status": "statis",
-  "area": "string",
+  "area": "kitchen",
   "jobTitle": "Developer",
   "tipRate": 30
 }]

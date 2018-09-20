@@ -1,3 +1,4 @@
+import { LoadEmployee, LoadEmployees } from './../../actions/employee.actions';
 import { LoadCountries } from './../../actions/country.actions';
 import { Employee } from './../../models/employee';
 import { Component, OnInit } from '@angular/core';
@@ -7,10 +8,12 @@ import { EventEmitter } from '@angular/core';
 import { Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { select } from '@ngrx/store';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { filter } from 'rxjs/internal/operators/filter';
+import { State } from '../../reducers/employee.reducers';
 
 @Component({
   selector: 'app-employee-form',
@@ -21,8 +24,10 @@ export class EmployeeFormComponent implements OnInit {
   @Output() submitted = new EventEmitter<Employee>();
 
   countries$: Observable<any>;
+  sub: Subscription[] = [];
 
   form: FormGroup = new FormGroup({
+    id: new FormControl(''),
     name: new FormControl('', Validators.required),
     dob: new FormControl('', Validators.required),
     country: new FormControl('', Validators.required),
@@ -39,13 +44,16 @@ export class EmployeeFormComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute) {
       this.countries$ = this.store.pipe(select('countries'));
+      this.sub.push(this.store.pipe(select('employees'), filter(e => e && e.activeEmployee))
+        .subscribe((e: State) => this.setFormValues(e.activeEmployee)));
     }
 
   ngOnInit() {
     // Assumption: Form is not going to be reset so for that reason is using route
     // https://angular.io/guide/router#snapshot-the-no-observable-alternative
-    if (this.activatedRoute.snapshot.paramMap.get('viewmode')) {
-      this.form.disable();
+    if (this.activatedRoute.snapshot.queryParamMap.get('viewmode')) { this.form.disable(); }
+    if (this.activatedRoute.snapshot.paramMap.get('id')) {
+      this.store.dispatch(new LoadEmployee(this.activatedRoute.snapshot.paramMap.get('id')));
     }
     this.store.dispatch(new LoadCountries());
   }
@@ -55,6 +63,13 @@ export class EmployeeFormComponent implements OnInit {
     this.router.navigateByUrl('/employees');
   }
 
+  setFormValues(employee: Employee) {
+    this.form.setValue(employee);
+    this.form.get('dob').setValue(new Date(employee.dob));
+    this.form.get('hireDate').setValue(new Date(employee.hireDate));
+  }
 
-
+  onNgDestroy() {
+    this.sub.forEach(subs => { if (subs) { subs.unsubscribe(); }});
+  }
 }

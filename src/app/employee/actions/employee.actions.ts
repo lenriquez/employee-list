@@ -5,6 +5,7 @@ import { Sort } from '@angular/material';
 
 export enum EmployeesActionTypes {
   LoadEmployees = 'Load Employees',
+  LoadEmployee = 'Load Employee',
   LoadEmployeesSuccess = 'Load Employees Success',
   LoadEmployeesError = 'Load Employees Error',
   RemoveEmployees = 'Remove Employee',
@@ -16,6 +17,11 @@ export class LoadEmployees implements Action {
   readonly type = EmployeesActionTypes.LoadEmployees;
 }
 
+export class LoadEmployee implements Action {
+  readonly type = EmployeesActionTypes.LoadEmployee;
+
+  constructor(public id: string) {}
+}
 export class LoadEmployeesSuccess implements Action {
   readonly type = EmployeesActionTypes.LoadEmployeesSuccess;
 

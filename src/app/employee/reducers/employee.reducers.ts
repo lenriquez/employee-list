@@ -7,12 +7,14 @@ export interface State {
   loading: boolean;
   loaded: boolean;
   employees: Employee[];
+  activeEmployee: Employee;
 }
 
 const initialState: State = {
   loading: false,
   loaded: false,
-  employees: []
+  employees: [],
+  activeEmployee: undefined
 };
 
 export function employeeReducer(state = initialState, action) {
@@ -20,7 +22,7 @@ export function employeeReducer(state = initialState, action) {
     case EmployeesActionTypes.LoadEmployees: {
       return {
         ...state,
-        loading: false,
+        loading: false
       };
     }
     case EmployeesActionTypes.LoadEmployeesSuccess: {
@@ -54,6 +56,14 @@ export function employeeReducer(state = initialState, action) {
       return {
         ...state,
         employees
+      };
+    }
+
+    case EmployeesActionTypes.LoadEmployee: {
+      const activeEmployee = state.employees.find( e => e.id === action.id );
+      return {
+        ...state,
+        activeEmployee: { ...activeEmployee }
       };
     }
   }

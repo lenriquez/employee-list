@@ -18,7 +18,7 @@
       <!-- Country -->
       <mat-form-field>
         <mat-select placeholder="Country" formControlName="country">
-          <mat-option *ngFor="let country of (countries$ | async).payload " value="country"> 
+          <mat-option *ngFor="let country of (countries$ | async).payload " [value]="country">
             {{ country }}
           </mat-option>
         </mat-select>
