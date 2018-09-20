@@ -7,7 +7,7 @@ export interface Employee {
   country: string;
   username: string;
   hireDate: Date;
-  status: string;
+  status: boolean;
   area: string;
   jobTitle: string;
   tipRate: number;
@@ -21,7 +21,7 @@ export class Employee implements Employee {
   country: string;
   username: string;
   hireDate: Date;
-  status: string;
+  status: boolean;
   area: string;
   jobTitle: string;
   tipRate: number;

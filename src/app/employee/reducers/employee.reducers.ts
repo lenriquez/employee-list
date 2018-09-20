@@ -14,7 +14,7 @@ const initialState: State = {
   employees: []
 };
 
-export function reducer(state = initialState, action) {
+export function employeeReducer(state = initialState, action) {
   switch (action.type) {
     case EmployeesActionTypes.LoadEmployees: {
       return {

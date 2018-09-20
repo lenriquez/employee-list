@@ -1,0 +1,67 @@
+
+<mat-card class="employee-form">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="column">
+      <!-- Name -->
+      <mat-form-field>
+        <input type="text" matInput placeholder="Name" formControlName="name">
+      </mat-form-field>
+
+      <!-- Date -->
+      <mat-form-field>
+        <input matInput [matDatepicker]="dob" placeholder="Date of Birth" formControlName="dob">
+        <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
+        <mat-datepicker #dob></mat-datepicker>
+      </mat-form-field>
+
+      <!-- Country -->
+      <mat-form-field>
+        <mat-select placeholder="Country" formControlName="country">
+          <mat-option *ngFor="let country of (countries$ | async).payload " value="country"> 
+            {{ country }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- UserName -->
+      <mat-form-field>
+        <input type="text" matInput placeholder="Username" formControlName="username">
+      </mat-form-field>
+
+      <!-- Date -->
+      <mat-form-field>
+        <input matInput [matDatepicker]="hd" placeholder="Hire Date" formControlName="hireDate">
+        <mat-datepicker-toggle matSuffix [for]="hd"></mat-datepicker-toggle>
+        <mat-datepicker #hd></mat-datepicker>
+      </mat-form-field>
+
+      <!-- Status -->
+      <mat-slide-toggle formControlName="status"> Status </mat-slide-toggle>
+    </div>
+    
+    <div class="column">
+      <!-- Area -->
+      <div class="area">
+        <p>Area:</p>
+        <mat-button-toggle-group #group="matButtonToggleGroup">
+          <mat-button-toggle value="services">Services</mat-button-toggle>
+          <mat-button-toggle value="kitchen">Kitchen</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+
+      <!-- Job Title -->
+      <mat-form-field>
+        <input type="text" matInput placeholder="Job Title" formControlName="jobTitle">
+      </mat-form-field>
+
+      <!-- Tip Rate -->
+      <mat-form-field>
+        <input type="number" matInput placeholder="Tip Rate" formControlName="tipRate">
+      </mat-form-field>
+    </div>
+  </form>
+  <p class="button" >
+    <button mat-raised-button (click)="onAddEmployee()">&lt; Back</button>
+    <button mat-raised-button (click)="onAddEmployee()">Save</button>
+  </p>
+</mat-card>

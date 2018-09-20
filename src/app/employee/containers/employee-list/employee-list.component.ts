@@ -4,6 +4,7 @@ import { Employee } from '../../models/employee';
 import { LoadEmployees, RemoveEmployees } from '../../actions/employee.actions';
 import { Observable } from 'rxjs';
 import { faEdit, faEye, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee-list',
@@ -15,7 +16,9 @@ export class EmployeeListComponent implements OnInit {
   displayedColumns = ['name', 'age', 'username', 'hireDate', 'actions'];
   icons = [ faEdit, faEye, faTrash ];
 
-  constructor(private store: Store<{employees: Employee[]}>) {
+  constructor(
+    private store: Store<{employees: Employee[]}>,
+    private router: Router) {
     this.employee$ = this.store.pipe(select('employees'));
   }
 
@@ -25,5 +28,9 @@ export class EmployeeListComponent implements OnInit {
 
   remove(id: string) {
     this.store.dispatch(new RemoveEmployees(id));
+  }
+
+  onAddEmployee() {
+    this.router.navigateByUrl('/employee/new_employee');
   }
 }
