@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 import { faEdit, faEye, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { Sort } from '@angular/material';
+import { filter } from 'rxjs/internal/operators/filter';
 
 @Component({
   selector: 'app-employee-list',
@@ -23,6 +24,7 @@ export class EmployeeListComponent implements OnInit {
     private store: Store<{employees: Employee[]}>,
     private router: Router) {
     this.employee$ = this.store.pipe(select('employees'),
+      filter(e => e && e.employees),
       map(e => e.employees));
   }
 

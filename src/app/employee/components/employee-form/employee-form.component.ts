@@ -25,6 +25,7 @@ export class EmployeeFormComponent implements OnInit {
 
   countries$: Observable<any>;
   sub: Subscription[] = [];
+  editMode = false;
 
   form: FormGroup = new FormGroup({
     id: new FormControl(''),
@@ -54,6 +55,7 @@ export class EmployeeFormComponent implements OnInit {
     if (this.activatedRoute.snapshot.queryParamMap.get('viewmode')) { this.form.disable(); }
     if (this.activatedRoute.snapshot.paramMap.get('id')) {
       this.store.dispatch(new LoadEmployee(this.activatedRoute.snapshot.paramMap.get('id')));
+      this.editMode = true;
     }
     this.store.dispatch(new LoadCountries());
   }
@@ -64,6 +66,7 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   setFormValues(employee: Employee) {
+    if (!employee.id) { return this.router.navigateByUrl('/employees'); }
     this.form.setValue(employee);
     this.form.get('dob').setValue(new Date(employee.dob));
     this.form.get('hireDate').setValue(new Date(employee.hireDate));
