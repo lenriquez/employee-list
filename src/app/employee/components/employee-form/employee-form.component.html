@@ -1,5 +1,6 @@
 
 <mat-card class="employee-form">
+  <h3>New Employee</h3>
   <form [formGroup]="form" (ngSubmit)="submit()">
     <div class="column">
       <!-- Name -->
@@ -43,7 +44,7 @@
       <!-- Area -->
       <div class="area">
         <p>Area:</p>
-        <mat-button-toggle-group #group="matButtonToggleGroup">
+        <mat-button-toggle-group #group="matButtonToggleGroup" formControlName="area">
           <mat-button-toggle value="services">Services</mat-button-toggle>
           <mat-button-toggle value="kitchen">Kitchen</mat-button-toggle>
         </mat-button-toggle-group>
@@ -61,7 +62,7 @@
     </div>
   </form>
   <p class="button" >
-    <button mat-raised-button (click)="onAddEmployee()">&lt; Back</button>
-    <button mat-raised-button (click)="onAddEmployee()">Save</button>
+    <a mat-raised-button [routerLink]="['/employees']" >&lt; Back</a>
+    <button mat-raised-button [disabled]="!form.valid" (click)="submit()">Save</button>
   </p>
 </mat-card>

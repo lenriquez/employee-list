@@ -9,6 +9,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { select } from '@ngrx/store';
+import { Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee-form',
@@ -21,20 +23,20 @@ export class EmployeeFormComponent implements OnInit {
   countries$: Observable<any>;
 
   form: FormGroup = new FormGroup({
-    name: new FormControl(''),
-    dob: new FormControl(''),
-    country: new FormControl(''),
-    username: new FormControl(''),
-    hireDate: new FormControl(''),
-    status: new FormControl(''),
-    area: new FormControl(''),
-    jobTitle: new FormControl(''),
-    tipRate: new FormControl(''),
-    age: new FormControl(''),
+    name: new FormControl('', Validators.required),
+    dob: new FormControl('', Validators.required),
+    country: new FormControl('', Validators.required),
+    username: new FormControl('', Validators.required),
+    hireDate: new FormControl('', Validators.required),
+    status: new FormControl('', Validators.required),
+    area: new FormControl('', Validators.required),
+    jobTitle: new FormControl('', Validators.required),
+    tipRate: new FormControl('', Validators.required),
   });
 
   constructor(
     private store: Store<{employees: Employee[]}>,
+    private router: Router,
     private activatedRoute: ActivatedRoute) {
       this.countries$ = this.store.pipe(select('countries'));
     }
@@ -49,9 +51,10 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   submit() {
-    if (this.form.valid) {
-      this.submitted.emit(this.form.value);
-    }
+    this.submitted.emit(new Employee(this.form.value, true));
+    this.router.navigateByUrl('/employees');
   }
+
+
 
 }

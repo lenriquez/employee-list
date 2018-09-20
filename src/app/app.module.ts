@@ -30,13 +30,15 @@ import {
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CountryEffects } from './employee/effects/country.effect';
+import { AgePipe } from './employee/pipes/age.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeeListComponent,
     EmployeeEditComponent,
-    EmployeeFormComponent
+    EmployeeFormComponent,
+    AgePipe
   ],
   imports: [
     BrowserModule,
