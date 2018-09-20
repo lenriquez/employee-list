@@ -75,4 +75,8 @@ export class EmployeeFormComponent implements OnInit {
   onNgDestroy() {
     this.sub.forEach(subs => { if (subs) { subs.unsubscribe(); }});
   }
+
+  isDirty(): boolean {
+    return this.form.dirty;
+  }
 }

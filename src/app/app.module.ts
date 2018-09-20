@@ -1,3 +1,4 @@
+
 import { routing } from './routes';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -11,10 +12,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EmployeeListComponent } from './employee/containers/employee-list/employee-list.component';
 import { EmployeeEditComponent } from './employee/containers/employee-edit/employee-edit.component';
 import { EmployeeFormComponent } from './employee/components/employee-form/employee-form.component';
+import { CanDeactivateGuard } from './employee/guards/can-deactivate-guard.service.';
 import { EmployeeEffects } from './employee/effects/employee.effect';
 import { employeeReducer } from './employee/reducers/employee.reducers';
 import { countryReducer } from './employee/reducers/countries.reducers';
+import { CountryEffects } from './employee/effects/country.effect';
+import { AgePipe } from './employee/pipes/age.pipe';
+import { ConfirmationDialogComponent } from './employee/components/confirmation-dialog/confirmation-dialog.component';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   MatButtonModule,
   MatTableModule,
@@ -26,12 +32,10 @@ import {
   MatButtonToggleModule,
   MatCardModule,
   MatSortModule,
+  MatDialogModule,
   MatDatepickerModule } from '@angular/material';
 
 
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { CountryEffects } from './employee/effects/country.effect';
-import { AgePipe } from './employee/pipes/age.pipe';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,8 @@ import { AgePipe } from './employee/pipes/age.pipe';
     EmployeeListComponent,
     EmployeeEditComponent,
     EmployeeFormComponent,
-    AgePipe
+    AgePipe,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -61,9 +66,11 @@ import { AgePipe } from './employee/pipes/age.pipe';
     MatSlideToggleModule,
     MatButtonToggleModule,
     MatCardModule,
+    MatDialogModule,
     MatSortModule
   ],
-  providers: [],
+  entryComponents: [ConfirmationDialogComponent],
+  providers: [CanDeactivateGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
