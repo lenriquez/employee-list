@@ -1,13 +1,15 @@
 import { Employee } from './../models/employee';
 import { Action } from '@ngrx/store';
 import { conditionallyCreateMapObjectLiteral } from '@angular/compiler/src/render3/view/util';
+import { Sort } from '@angular/material';
 
 export enum EmployeesActionTypes {
   LoadEmployees = 'Load Employees',
   LoadEmployeesSuccess = 'Load Employees Success',
   LoadEmployeesError = 'Load Employees Error',
   RemoveEmployees = 'Remove Employee',
-  AddEmployees = 'AddEmployees'
+  AddEmployees = 'AddEmployees',
+  SortEmployees = 'SortEmployees'
 }
 
 export class LoadEmployees implements Action {
@@ -34,4 +36,10 @@ export class AddEmployees implements Action {
   readonly type = EmployeesActionTypes.AddEmployees;
 
   constructor(public id: string) {}
+}
+
+export class SortEmployees implements Action {
+  readonly type = EmployeesActionTypes.SortEmployees;
+
+  constructor(public sort: Sort) {}
 }

@@ -25,6 +25,7 @@ import {
   MatSlideToggleModule,
   MatButtonToggleModule,
   MatCardModule,
+  MatSortModule,
   MatDatepickerModule } from '@angular/material';
 
 
@@ -59,7 +60,8 @@ import { AgePipe } from './employee/pipes/age.pipe';
     MatSelectModule,
     MatSlideToggleModule,
     MatButtonToggleModule,
-    MatCardModule
+    MatCardModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]

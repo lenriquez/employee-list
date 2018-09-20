@@ -1,10 +1,13 @@
+
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Employee } from '../../models/employee';
-import { LoadEmployees, RemoveEmployees } from '../../actions/employee.actions';
+import { LoadEmployees, RemoveEmployees, SortEmployees } from '../../actions/employee.actions';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { faEdit, faEye, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
+import { Sort } from '@angular/material';
 
 @Component({
   selector: 'app-employee-list',
@@ -19,7 +22,8 @@ export class EmployeeListComponent implements OnInit {
   constructor(
     private store: Store<{employees: Employee[]}>,
     private router: Router) {
-    this.employee$ = this.store.pipe(select('employees'));
+    this.employee$ = this.store.pipe(select('employees'),
+      map(e => e.employees));
   }
 
   ngOnInit() {
@@ -32,5 +36,10 @@ export class EmployeeListComponent implements OnInit {
 
   onAddEmployee() {
     this.router.navigateByUrl('/employee/new_employee');
+  }
+
+  sort(sort: Sort) {
+    if (!sort.active || sort.direction === '') { return; }
+    this.store.dispatch(new SortEmployees(sort));
   }
 }

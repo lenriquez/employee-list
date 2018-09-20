@@ -1,10 +1,22 @@
 [{
   "id": "990090f6-88c5-46e9-82d4-11076e5fab38",
   "name": "luis felipe ",
-  "dob": 1537289275217,
+  "dob": 466232400000,
   "country": "Colombia",
   "username": "test1",
   "hireDate": 1537289275217,
+  "status": "statis",
+  "area": "string",
+  "jobTitle": "Developer",
+  "tipRate": 30
+},
+{
+  "id": "990090f6-88c5-46e9-82d4-11076e5fab37",
+  "name": "luis felipe 2 ",
+  "dob": 434610000000,
+  "country": "Colombia",
+  "username": "test1",
+  "hireDate": 1437289275210,
   "status": "statis",
   "area": "string",
   "jobTitle": "Developer",
