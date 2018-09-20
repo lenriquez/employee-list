@@ -30,5 +30,7 @@ export function countryReducer(state = initialState, action) {
           payload: action.payload
         };
     }
+    default:
+      return state;
   }
 }

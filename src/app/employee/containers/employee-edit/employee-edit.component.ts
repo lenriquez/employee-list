@@ -1,4 +1,7 @@
+import { AddEmployee } from './../../actions/employee.actions';
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Employee } from '../../models/employee';
 
 @Component({
   selector: 'app-employee-edit',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeeEditComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: Store<{employees: Employee[]}>)  { }
 
   ngOnInit() {
   }
 
+  onAddEmployee(event) {
+    this.store.dispatch(new AddEmployee(event));
+  }
 }

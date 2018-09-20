@@ -26,10 +26,9 @@ export function employeeReducer(state = initialState, action) {
       };
     }
     case EmployeesActionTypes.LoadEmployeesSuccess: {
-      // The if is not necessary if I had a real database;
       return state.loaded ?
         { ...state } :
-        { ...state,
+        {
           loading: false,
           loaded: true,
           employees: action.payload
@@ -66,6 +65,21 @@ export function employeeReducer(state = initialState, action) {
         activeEmployee: { ...activeEmployee }
       };
     }
+
+    case EmployeesActionTypes.AddEmployee: {
+      const indexEmployee = state.employees.findIndex( e => e.id === action.employee.id );
+      const employees = state.employees.slice();
+
+      if (indexEmployee === -1) { employees.push(action.employee); }
+      if (indexEmployee !== -1) { employees[indexEmployee] = action.employee; }
+
+      return {
+        ...state,
+        employees
+      };
+    }
+    default:
+      return state;
   }
 
 }

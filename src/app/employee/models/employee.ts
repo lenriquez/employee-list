@@ -14,7 +14,7 @@ export interface Employee {
 }
 
 export class Employee implements Employee {
-  id = uuid();
+  id: string;
   name: string;
   dob: number;
   country: string;
@@ -26,13 +26,14 @@ export class Employee implements Employee {
   tipRate: number;
 
   constructor(fields?: Object, transformDates?: boolean) {
+    if (!fields.id) { fields.id = uuid(); }
     if (transformDates) { fields = this.mapDates(fields); }
     if (fields) { Object.assign(this, fields); }
   }
 
   mapDates(fields: any) {
     fields.dob = fields.dob.getTime();
-    fields.dob = fields.hireDate.getTime();
+    fields.hireDate = fields.hireDate.getTime();
     return fields;
   }
 }

@@ -9,7 +9,7 @@ export enum EmployeesActionTypes {
   LoadEmployeesSuccess = 'Load Employees Success',
   LoadEmployeesError = 'Load Employees Error',
   RemoveEmployees = 'Remove Employee',
-  AddEmployees = 'AddEmployees',
+  AddEmployee = 'Add Employee',
   SortEmployees = 'SortEmployees'
 }
 
@@ -38,10 +38,10 @@ export class RemoveEmployees implements Action {
   constructor(public id: string) {}
 }
 
-export class AddEmployees implements Action {
-  readonly type = EmployeesActionTypes.AddEmployees;
+export class AddEmployee implements Action {
+  readonly type = EmployeesActionTypes.AddEmployee;
 
-  constructor(public id: string) {}
+  constructor(public employee: string) {}
 }
 
 export class SortEmployees implements Action {
