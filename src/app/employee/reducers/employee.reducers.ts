@@ -8,13 +8,15 @@ export interface State {
   loaded: boolean;
   employees: Employee[];
   activeEmployee: Employee;
+  employeesSearch: Employee[];
 }
 
 const initialState: State = {
   loading: false,
   loaded: false,
   employees: [],
-  activeEmployee: undefined
+  activeEmployee: undefined,
+  employeesSearch: undefined
 };
 
 export function employeeReducer(state = initialState, action) {
@@ -31,7 +33,8 @@ export function employeeReducer(state = initialState, action) {
         {
           loading: false,
           loaded: true,
-          employees: action.payload
+          employees: action.payload,
+          employeesSearch: action.payload
         };
     }
 
@@ -78,8 +81,9 @@ export function employeeReducer(state = initialState, action) {
         employees
       };
     }
+
     default:
-      return state;
+      return {...state };
   }
 
 }
