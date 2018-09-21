@@ -1,0 +1,12 @@
+
+
+<form *ngIf="form" [formGroup]="form">
+  <mat-form-field>
+    <mat-select placeholder="Job Title" formControlName="jobTitle">
+      <mat-option *ngFor="let title of titles" [value]="title" (click)="selected(title)">
+        {{ title }}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="form.get('jobTitle').invalid">{{ getError(form.get('jobTitle'))}}</mat-error>
+</mat-form-field>
+</form>

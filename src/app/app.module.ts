@@ -19,6 +19,7 @@ import { countryReducer } from './employee/reducers/countries.reducers';
 import { CountryEffects } from './employee/effects/country.effect';
 import { AgePipe } from './employee/pipes/age.pipe';
 import { ConfirmationDialogComponent } from './employee/components/confirmation-dialog/confirmation-dialog.component';
+import { JobTitleComponent } from './employee/components/job-title/job-title.component';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
@@ -35,8 +36,6 @@ import {
   MatDialogModule,
   MatDatepickerModule } from '@angular/material';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +43,8 @@ import {
     EmployeeEditComponent,
     EmployeeFormComponent,
     AgePipe,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    JobTitleComponent
   ],
   imports: [
     BrowserModule,

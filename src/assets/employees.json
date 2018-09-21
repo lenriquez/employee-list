@@ -5,9 +5,9 @@
   "country": "Colombia",
   "username": "test1",
   "hireDate": 1537289275217,
-  "status": "statis",
-  "area": "service",
-  "jobTitle": "Developer",
+  "status": "true",
+  "area": "services",
+  "jobTitle": "Manager",
   "tipRate": 30
 },
 {
@@ -17,8 +17,8 @@
   "country": "Colombia",
   "username": "test1",
   "hireDate": 1437289275210,
-  "status": "statis",
+  "status": "true",
   "area": "kitchen",
-  "jobTitle": "Developer",
+  "jobTitle": "Chef",
   "tipRate": 30
 }]

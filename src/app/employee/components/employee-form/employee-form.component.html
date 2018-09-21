@@ -58,13 +58,16 @@
       </div>
 
       <!-- Job Title -->
-      <mat-form-field>
-        <input type="text" matInput placeholder="Job Title" formControlName="jobTitle">
-      </mat-form-field>
+      <app-job-title
+        [area]="form.get('area').value"
+        [jobTitle]="form.get('jobTitle').value"
+        (selectedTitle)="setTitle($event)">
+      </app-job-title>
 
       <!-- Tip Rate -->
       <mat-form-field>
         <input type="number" matInput placeholder="Tip Rate" formControlName="tipRate">
+        <span matPrefix>%&nbsp;</span>
         <mat-error *ngIf="form.get('tipRate').invalid">{{ getError(form.get('tipRate'))}}</mat-error>
       </mat-form-field>
     </div>

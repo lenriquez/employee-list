@@ -33,7 +33,7 @@ export class EmployeeFormComponent implements OnInit {
     name: new FormControl('', Validators.required),
     dob: new FormControl('', [Validators.required, validateAge()]),
     country: new FormControl('', Validators.required),
-    username: new FormControl('', [ Validators.required,  Validators.pattern('[a-zA-Z ]*')]),
+    username: new FormControl('', [ Validators.required,  Validators.pattern('[a-zA-Z0-9]*')]),
     hireDate: new FormControl('', Validators.required),
     status: new FormControl('true', Validators.required),
     area: new FormControl('kitchen'),
@@ -57,6 +57,8 @@ export class EmployeeFormComponent implements OnInit {
     if (this.activatedRoute.snapshot.paramMap.get('id')) {
       this.store.dispatch(new LoadEmployee(this.activatedRoute.snapshot.paramMap.get('id')));
       this.editMode = true;
+    } else {
+      this.form.setValue(new Employee());
     }
     this.store.dispatch(new LoadCountries());
   }
@@ -86,5 +88,9 @@ export class EmployeeFormComponent implements OnInit {
     fc.hasError('pattern') ? 'Invalid characters' :
     fc.hasError('validateAge') ? 'Employee needs to be 18 years old or older' :
     '';
+  }
+
+  setTitle(title: string): void {
+    this.form.get('jobTitle').setValue(title);
   }
 }
