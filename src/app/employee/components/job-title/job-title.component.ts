@@ -5,6 +5,7 @@ import { Input } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-job-title',
@@ -27,12 +28,13 @@ export class JobTitleComponent implements OnInit {
   form: FormGroup;
   _area: string;
 
-  constructor() {}
+  constructor(private activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
     this.form = new FormGroup({
       jobTitle: new FormControl(this.jobTitle, Validators.required)
     });
+    if (this.activatedRoute.snapshot.queryParamMap.get('viewmode')) { this.form.disable(); }
   }
 
   selected(title) {

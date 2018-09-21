@@ -5,9 +5,9 @@
   <form [formGroup]="form" (ngSubmit)="submit()">
     <div class="column">
       <!-- Name -->
-      <mat-form-field>
+      <mat-form-field *ngIf="!editMode">
         <input type="text" matInput placeholder="Name" formControlName="name">
-        <mat-error *ngIf="form.get('username').invalid">{{ getError(form.get('name'))}}</mat-error>
+        <mat-error *ngIf="form.get('username').invalid">{{ getError(form.get('name')) }}</mat-error>
       </mat-form-field>
 
       <!-- Date -->
@@ -15,7 +15,7 @@
         <input matInput [matDatepicker]="dob" placeholder="Date of Birth" formControlName="dob">
         <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
         <mat-datepicker #dob></mat-datepicker>
-        <mat-error *ngIf="form.get('dob').invalid">{{ getError(form.get('dob'))}}</mat-error>
+        <mat-error *ngIf="form.get('dob').invalid">{{ getError(form.get('dob')) }}</mat-error>
       </mat-form-field>
 
       <!-- Country -->
@@ -25,13 +25,13 @@
             {{ country }}
           </mat-option>
         </mat-select>
-        <mat-error *ngIf="form.get('country').invalid">{{ getError(form.get('country'))}}</mat-error>
+        <mat-error *ngIf="form.get('country').invalid">{{ getError(form.get('country')) }}</mat-error>
       </mat-form-field>
 
       <!-- UserName -->
       <mat-form-field>
         <input type="text" matInput placeholder="Username" formControlName="username">
-        <mat-error *ngIf="form.get('username').invalid">{{ getError(form.get('username'))}}</mat-error>
+        <mat-error *ngIf="form.get('username').invalid">{{ getError(form.get('username')) }}</mat-error>
       </mat-form-field>
 
       <!-- Date -->
@@ -39,7 +39,7 @@
         <input matInput [matDatepicker]="hd" placeholder="Hire Date" formControlName="hireDate">
         <mat-datepicker-toggle matSuffix [for]="hd"></mat-datepicker-toggle>
         <mat-datepicker #hd></mat-datepicker>
-        <mat-error *ngIf="form.get('hireDate').invalid">{{ getError(form.get('hireDate'))}}</mat-error>
+        <mat-error *ngIf="form.get('hireDate').invalid">{{ getError(form.get('hireDate')) }}</mat-error>
       </mat-form-field>
 
       <!-- Status -->
@@ -65,7 +65,7 @@
       </app-job-title>
 
       <!-- Tip Rate -->
-      <mat-form-field>
+      <mat-form-field *ngIf="showTipRate">
         <input type="number" matInput placeholder="Tip Rate" formControlName="tipRate">
         <span matPrefix>%&nbsp;</span>
         <mat-error *ngIf="form.get('tipRate').invalid">{{ getError(form.get('tipRate'))}}</mat-error>

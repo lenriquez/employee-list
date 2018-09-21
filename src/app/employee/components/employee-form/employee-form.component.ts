@@ -27,6 +27,8 @@ export class EmployeeFormComponent implements OnInit {
   countries$: Observable<any>;
   sub: Subscription[] = [];
   editMode = false;
+  showTipRate = false;
+  isSubmitted = false;
 
   form: FormGroup = new FormGroup({
     id: new FormControl(''),
@@ -65,6 +67,7 @@ export class EmployeeFormComponent implements OnInit {
 
   submit() {
     this.submitted.emit(new Employee(this.form.value, true));
+    this.isSubmitted = true;
     this.router.navigateByUrl('/employees');
   }
 
@@ -73,6 +76,7 @@ export class EmployeeFormComponent implements OnInit {
     this.form.setValue(employee);
     this.form.get('dob').setValue(new Date(employee.dob));
     this.form.get('hireDate').setValue(new Date(employee.hireDate));
+    this.setTipRate(employee.jobTitle);
   }
 
   onNgDestroy() {
@@ -80,11 +84,12 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   isDirty(): boolean {
+    if (this.isSubmitted) { return false; }
     return this.form.dirty;
   }
 
-  getError(fc: FormControl) {
-    return fc.hasError('required') ? 'You must enter a value' :
+  getError(fc: FormControl): string {
+    return fc.hasError('required') || fc.hasError('matDatepickerParse') ? 'You must enter a valid value' :
     fc.hasError('pattern') ? 'Invalid characters' :
     fc.hasError('validateAge') ? 'Employee needs to be 18 years old or older' :
     '';
@@ -92,5 +97,11 @@ export class EmployeeFormComponent implements OnInit {
 
   setTitle(title: string): void {
     this.form.get('jobTitle').setValue(title);
+    this.setTipRate(title);
+  }
+
+  setTipRate(title: string) {
+    this.showTipRate = title === 'Waitress' || title === 'Dining Room Manager';
+    if (!this.showTipRate) { this.form.get('tipRate').setValue(0); }
   }
 }
