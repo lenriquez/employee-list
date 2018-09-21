@@ -14,6 +14,7 @@ import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { filter } from 'rxjs/internal/operators/filter';
 import { State } from '../../reducers/employee.reducers';
+import { validateAge } from '../../validators/age.validator';
 
 @Component({
   selector: 'app-employee-form',
@@ -30,12 +31,12 @@ export class EmployeeFormComponent implements OnInit {
   form: FormGroup = new FormGroup({
     id: new FormControl(''),
     name: new FormControl('', Validators.required),
-    dob: new FormControl('', Validators.required),
+    dob: new FormControl('', [Validators.required, validateAge()]),
     country: new FormControl('', Validators.required),
-    username: new FormControl('', Validators.required),
+    username: new FormControl('', [ Validators.required,  Validators.pattern('[a-zA-Z ]*')]),
     hireDate: new FormControl('', Validators.required),
-    status: new FormControl('', Validators.required),
-    area: new FormControl('', Validators.required),
+    status: new FormControl('true', Validators.required),
+    area: new FormControl('kitchen'),
     jobTitle: new FormControl('', Validators.required),
     tipRate: new FormControl('', Validators.required),
   });
@@ -78,5 +79,12 @@ export class EmployeeFormComponent implements OnInit {
 
   isDirty(): boolean {
     return this.form.dirty;
+  }
+
+  getError(fc: FormControl) {
+    return fc.hasError('required') ? 'You must enter a value' :
+    fc.hasError('pattern') ? 'Invalid characters' :
+    fc.hasError('validateAge') ? 'Employee needs to be 18 years old or older' :
+    '';
   }
 }
